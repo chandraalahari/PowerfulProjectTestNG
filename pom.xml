@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>PowerfulProjTestNG</groupId>
+	<artifactId>PowerfulProjectTestNG</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<name>PowerfulProjectTestNG</name>
+	<!-- FIXME change it to the project's website -->
+	<url>http://www.example.com</url>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>17</java.version>
+		<maven.compiler.release>17</maven.compiler.release>
+		<selenium.java.release>4.35.0</selenium.java.release>
+		<testng.version>7.11.0</testng.version>
+		<apache.poi.version>5.4.1</apache.poi.version>
+		<webdrivermanager.version>6.2.0</webdrivermanager.version>
+		<maven.complier.version>3.14.0</maven.complier.version>
+		<maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
+	</properties>
+	<dependencyManagement>
+		
+	</dependencyManagement>
+	
+	<dependencies>
+			<dependency>
+				<groupId>org.seleniumhq.selenium</groupId>
+				<artifactId>selenium-java</artifactId>
+				<version>${selenium.java.release}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.testng</groupId>
+				<artifactId>testng</artifactId>
+				<version>${testng.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.poi</groupId>
+				<artifactId>poi</artifactId>
+				<version>${apache.poi.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.github.bonigarcia</groupId>
+				<artifactId>webdrivermanager</artifactId>
+				<version>${webdrivermanager.version}</version>
+			</dependency>
+		</dependencies>
+	<build>
+		<pluginManagement><!-- lock down plugins versions to avoid using Maven
+			defaults (may be moved to parent pom) -->
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>${maven.complier.version}</version> <!-- Use latest
+					stable version -->
+					<configuration>
+						<source>${java-version}</source> <!-- Your Java version -->
+						<target>${java-version}</target>
+					</configuration>
+				</plugin>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-surefire-plugin</artifactId>
+					<version>${maven-surefire-plugin.version}</version>
+					<configuration>
+						<suiteXmlFiles>
+							<suiteXmlFile>testng.xml</suiteXmlFile>
+						</suiteXmlFiles>
+						<parallel>methods</parallel> <!-- options: tests,
+						classes, methods, instances -->
+						<threadCount>5</threadCount>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+</project>
