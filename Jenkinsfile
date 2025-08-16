@@ -14,11 +14,11 @@ pipeline {
             }
         }
 
-        stage('Set up JDK 17') {
+        stage('Set up JDK 21') {
             steps {
-                echo "Setting up JDK 17"
+                echo "Setting up JDK 21"
                 // Jenkins must have JDK installed or use a tool config
-                tool name: 'jdk17', type: 'jdk'
+                tool name: 'jdk21', type: 'jdk'
             }
         }
 
