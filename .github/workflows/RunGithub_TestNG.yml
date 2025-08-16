@@ -43,7 +43,7 @@ jobs:
          uses: actions/upload-artifact@v4
          with:
           name: extent-report
-          path: target/extent-report
+          path: reports/ExtentReport.html
 
     
        - name: Upload Allure Results
@@ -58,4 +58,4 @@ jobs:
          uses: actions/upload-artifact@v4
          with:
           name: allure-report-html
-          path: target/site/allure-maven-plugin
+          path: target/allure-report
