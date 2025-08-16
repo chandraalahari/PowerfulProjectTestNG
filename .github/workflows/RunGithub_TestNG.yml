@@ -35,7 +35,8 @@ jobs:
          continue-on-error: true
 
        - name: List target directory
-         run: dir target /s   # Windows runner
+         shell: pwsh
+         run: Get-ChildItem -Path target -Recurse
        
   
        - name: Upload Extent Report
