@@ -6,6 +6,8 @@ import java.time.Duration;
 import java.util.Properties;
 
 import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -32,6 +34,13 @@ public class BaseTest {
 	public void setUpMethod() throws FileNotFoundException, IOException {
 		DriverFactory.getInstance().initiateBrowser(browser);
 		DriverFactory.getDriver().get(prop.getProperty("mainurl"));
+		WaitforPageLoad();
+	}
+
+	private void WaitforPageLoad() {
+		 new WebDriverWait(DriverFactory.getDriver(), Duration.ofSeconds(20))
+		          .until(ExpectedConditions.titleContains("Sign"));
+		
 	}
 
 	@AfterMethod

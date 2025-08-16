@@ -8,6 +8,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import io.qameta.allure.Step;
+
 public class LoginPage {
 
 	private WebDriver driver;
@@ -26,6 +28,7 @@ public class LoginPage {
 			.xpath("//h1[@id ='kc-page-title' and contains(text(),'Forgot Your Password?')]");
 	private By homePageAvator = By.xpath("//div[text()='GO']");
 
+	@Step("Getting the page title")
 	public String getTitle() {
 		return driver.getTitle();
 	}

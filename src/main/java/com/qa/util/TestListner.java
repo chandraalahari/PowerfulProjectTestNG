@@ -22,12 +22,12 @@ public class TestListner implements ITestListener {
 	protected Logger log = LoggerHelper.getLogger(TestListner.class);
 
 	public void onTestStart(ITestResult result) {
-		//ExtentTestManager.createTest(result.getTestName());
+		ExtentTestManager.createTest(result.getTestName());
 		log.info("Test Method Started " + result.getName());
 	}
 
 	public void onTestSuccess(ITestResult result) {
-		//ExtentTestManager.getTest().pass(result.getTestName());
+		ExtentTestManager.getTest().pass(result.getTestName());
 		log.info("Test Method Success " + result.getName());
 	}
 
@@ -38,14 +38,14 @@ public class TestListner implements ITestListener {
 		byte[] srcBytes = ((TakesScreenshot) DriverFactory.getDriver()).getScreenshotAs(OutputType.BYTES);
 		String desSrc = System.getProperty("user.dir") + "/Screenshot/" + result.getName() + System.currentTimeMillis()
 				+ ".png";
-		/*
-		 * if (ExtentTestManager.getTest() != null) {
-		 * ExtentTestManager.getTest().fail(result.getTestName());
-		 * ExtentTestManager.getTest().fail("Screenshot of Failure",
-		 * com.aventstack.extentreports.MediaEntityBuilder.createScreenCaptureFromPath(
-		 * desSrc).build()); } else { log.error("ExtentTest not found for " +
-		 * result.getTestName()); }
-		 */
+		
+		 if (ExtentTestManager.getTest() != null) {
+		 ExtentTestManager.getTest().fail(result.getTestName());
+		 ExtentTestManager.getTest().fail("Screenshot of Failure",
+		 com.aventstack.extentreports.MediaEntityBuilder.createScreenCaptureFromPath(
+		 desSrc).build()); } else { log.error("ExtentTest not found for " +
+		 result.getTestName()); }
+		 
 		try {
 			FileUtils.copyFile(src, new File(desSrc));
 
@@ -57,13 +57,13 @@ public class TestListner implements ITestListener {
 	}
 
 	public void onTestSkipped(ITestResult result) {
-		//ExtentTestManager.getTest().skip(result.getTestName());
+		ExtentTestManager.getTest().skip(result.getTestName());
 		log.warn("Test Method Skipped " + result.getName());
 	}
 
 	public void onFinish(ITestContext context) {
 		log.info("Test Class Finish " + context.getName());
-		//ExtentManager.getExtentReports().flush();
+		ExtentManager.getExtentReports().flush();
 	}
 
 }
