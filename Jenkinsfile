@@ -47,6 +47,16 @@ pipeline {
             }
         }
     }
+     post {
+        always {
+            // Publish Allure report
+            allure([
+                includeProperties: false,
+                jdk: '',
+                results: [[path: 'target/allure-results']]
+            ])
+        }
+     }
 
     post {
         always {
