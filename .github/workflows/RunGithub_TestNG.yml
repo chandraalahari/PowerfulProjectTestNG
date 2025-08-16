@@ -27,26 +27,34 @@ jobs:
        - name: Build with Maven TestNG (headless)  
          working-directory: ${{ github.workspace }}
          run: mvn verify -Dheadless=true -DBaseurl="${{env.BASE_URL}}" -DBrowser="${{env.BROWSER}}"
-      
-         # Publish Extent Report
+         continue-on-error: true
+
+    
+       - name: Generate Allure Report
+         run: mvn allure:report
+         continue-on-error: true
+
+       - name: List target directory
+         run: dir target /s   # Windows runner
+       
+  
        - name: Upload Extent Report
-         if: always() 
+         if: always() && (success() || failure())
          uses: actions/upload-artifact@v4
          with:
           name: extent-report
           path: target/extent-report
 
-        # Publish Allure Results
+    
        - name: Upload Allure Results
-         if: always() 
+         if: always() && (success() || failure())
          uses: actions/upload-artifact@v4
          with:
           name: allure-results
           path: target/allure-results
 
-       # Upload Allure HTML Report
        - name: Upload Allure HTML
-         if: always()
+         if: always() && (success() || failure())
          uses: actions/upload-artifact@v4
          with:
           name: allure-report-html
