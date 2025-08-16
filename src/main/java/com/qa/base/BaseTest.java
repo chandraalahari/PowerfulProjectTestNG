@@ -27,7 +27,7 @@ public class BaseTest {
 		log = LoggerHelper.getLogger(this.getClass());
 	    prop = ConfigReader.readConfigProperties();
 		browser = System.getenv("BROWSER");
-		if(browser == "" || browser.isEmpty())
+		if(browser == "" || browser == null)
 			browser = "chrome"; //assign default
 		log.info("Browser selected is - " + browser);
 	}
@@ -36,7 +36,7 @@ public class BaseTest {
 	public void setUpMethod() throws FileNotFoundException, IOException {
 		DriverFactory.getInstance().initiateBrowser(browser);
 		String onionUrl = System.getenv("BASE_URL");
-		if(onionUrl == null || onionUrl.isEmpty()) {
+		if(onionUrl == null || onionUrl == null) {
 			onionUrl = prop.getProperty("mainurl");
 		}
 		

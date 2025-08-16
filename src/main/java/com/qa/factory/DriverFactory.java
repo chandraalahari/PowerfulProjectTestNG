@@ -30,10 +30,10 @@ public class DriverFactory {
 			WebDriverManager.chromedriver().setup();
 			ChromeOptions options = new ChromeOptions();
 			// options.addArguments("--headless");
-			options.addArguments("--disable-gpu");
+			//options.addArguments("--disable-gpu");
 			options.addArguments("--window-size=1920,1080");
 			//options.addArguments("--incognito");
-			options.addArguments("--disable-extensions");
+			//options.addArguments("--disable-extensions");
 			m_TLDriver.set(new ChromeDriver(options));
 
 		} else if (browser.equalsIgnoreCase("firefox")) {
