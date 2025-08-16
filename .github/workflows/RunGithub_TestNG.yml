@@ -62,7 +62,7 @@ jobs:
     
        - name: Deploy Extent Report to GitHub Pages
          if: always()
-         uses: peaceiris/actions-gh-pages@v7
+         uses: peaceiris/actions-gh-pages@v4
          with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./reports
@@ -70,7 +70,7 @@ jobs:
 
        - name: Deploy Allure Report to GitHub Pages
          if: always()
-         uses: peaceiris/actions-gh-pages@v7
+         uses: peaceiris/actions-gh-pages@v4
          with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./target/allure-report
