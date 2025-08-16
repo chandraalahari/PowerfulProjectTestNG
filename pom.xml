@@ -119,7 +119,7 @@
 					</properties>
 					<parallel>methods</parallel> <!-- options: tests,
 						classes, methods, instances -->
-					<threadCount>5</threadCount>
+					<threadCount>${threadcount}</threadCount>
 				</configuration>
 			</plugin>
 			<!-- Allure Maven Plugin -->

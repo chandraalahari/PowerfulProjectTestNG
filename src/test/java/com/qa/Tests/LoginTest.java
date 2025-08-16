@@ -16,6 +16,7 @@ import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
 import io.qameta.allure.Severity;
 import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 
 @Listeners(TestListener.class)
 public class LoginTest extends BaseTest {
@@ -29,20 +30,34 @@ public class LoginTest extends BaseTest {
 
 	@Test(priority = 0, alwaysRun = true, description = "Login test are executed - Assert Page Title", retryAnalyzer = RetryAnalyzer.class)
 	@Description("The Title Page Text Test")
-	
 	public void onionToolWebTitle() {
 		String title = loginPage.getTitle();
-		Assert.assertTrue(title.contains("Sign"));
+		Assert.assertTrue(title.contains("Sign in to Onion"));
 	}
 	
 	@Test(priority = 1, alwaysRun = true, description = "Forgot password link exist", retryAnalyzer = RetryAnalyzer.class)
 	@Epic("Home Page Epic")
 	@Feature("Home Page features")
+	@Story("Home Page Story")
 	@Severity(SeverityLevel.CRITICAL)
 	public void forgotPasswordLinkExists() {
 		loginPage.clickForgotPasswordLink();
 		boolean forgotText = loginPage.forgotPassWordPageShown();
 		Assert.assertTrue(forgotText);
 	}
+	
+	@Test(priority = 2, alwaysRun = true, description = "User Login Test", retryAnalyzer = RetryAnalyzer.class)
+	@Epic("User Login Epic")
+	@Feature("User Login features")
+	@Story("User Login Story")
+	@Severity(SeverityLevel.CRITICAL)
+	public void userLoginTest() {
+		loginPage.enterUserName("onion@gnapi.tech");
+		loginPage.enterPassword("Gnapi@1234");
+		loginPage.clickSignIn();
+		String landingPageText = loginPage.extractTitleOnHomePage();
+		Assert.assertEquals(landingPageText, "Onion: Complete Test Management Platform");
+	}
+	
 
 }
