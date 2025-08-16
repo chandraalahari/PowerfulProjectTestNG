@@ -24,31 +24,62 @@
 		<maven-surefire-plugin.version>3.5.3</maven-surefire-plugin.version>
 	</properties>
 	<dependencyManagement>
-		
+
 	</dependencyManagement>
-	
+
 	<dependencies>
-			<dependency>
-				<groupId>org.seleniumhq.selenium</groupId>
-				<artifactId>selenium-java</artifactId>
-				<version>${selenium.java.release}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.testng</groupId>
-				<artifactId>testng</artifactId>
-				<version>${testng.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.poi</groupId>
-				<artifactId>poi</artifactId>
-				<version>${apache.poi.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>io.github.bonigarcia</groupId>
-				<artifactId>webdrivermanager</artifactId>
-				<version>${webdrivermanager.version}</version>
-			</dependency>
-		</dependencies>
+		<dependency>
+			<groupId>org.seleniumhq.selenium</groupId>
+			<artifactId>selenium-java</artifactId>
+			<version>${selenium.java.release}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>${testng.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>${apache.poi.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.github.bonigarcia</groupId>
+			<artifactId>webdrivermanager</artifactId>
+			<version>${webdrivermanager.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+			<version>2.25.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+			<version>2.25.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.aventstack</groupId>
+			<artifactId>extentreports</artifactId>
+			<version>5.0.9</version>
+		</dependency>
+		<dependency>
+    <groupId>io.qameta.allure</groupId>
+    <artifactId>allure-java-commons</artifactId>
+    <version>2.29.1</version>
+</dependency>
+		<dependency>
+			<groupId>io.qameta.allure</groupId>
+			<artifactId>allure-maven</artifactId>
+			<version>2.12.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.30</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
 	<build>
 		<pluginManagement><!-- lock down plugins versions to avoid using Maven
 			defaults (may be moved to parent pom) -->
@@ -59,8 +90,8 @@
 					<version>${maven.complier.version}</version> <!-- Use latest
 					stable version -->
 					<configuration>
-						<source>${java-version}</source> <!-- Your Java version -->
-						<target>${java-version}</target>
+						<source>${java.version}</source> <!-- Your Java version -->
+						<target>${java.version}</target>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -75,6 +106,12 @@
 						classes, methods, instances -->
 						<threadCount>5</threadCount>
 					</configuration>
+				</plugin>
+				<!-- Allure Maven Plugin -->
+				<plugin>
+					<groupId>io.qameta.allure</groupId>
+					<artifactId>allure-maven</artifactId>
+					<version>2.30.0</version>
 				</plugin>
 			</plugins>
 		</pluginManagement>

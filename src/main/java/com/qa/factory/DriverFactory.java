@@ -17,7 +17,7 @@ public class DriverFactory {
 	
 	private DriverFactory() {}
 	
-	public DriverFactory getInstance() {
+	public static DriverFactory getInstance() {
 		if(instance == null) {
 			instance = new DriverFactory();
 		}
@@ -32,7 +32,7 @@ public class DriverFactory {
 			// options.addArguments("--headless");
 			options.addArguments("--disable-gpu");
 			options.addArguments("--window-size=1920,1080");
-			options.addArguments("--incognito");
+			//options.addArguments("--incognito");
 			options.addArguments("--disable-extensions");
 			m_TLDriver.set(new ChromeDriver(options));
 
@@ -63,8 +63,15 @@ public class DriverFactory {
 		return getDriver();
 	}
 
-	public synchronized WebDriver getDriver() {
+	public synchronized static WebDriver getDriver() {
 		return m_TLDriver.get();
+	}
+	
+	public static void quitBrowser() {
+		if(getDriver() != null) {
+			getDriver().quit();
+			m_TLDriver.remove();
+		}
 	}
 
 }
