@@ -3,6 +3,7 @@
 <suite name="Suite">
 	<listeners>
 		<listener class-name="io.qameta.allure.testng.AllureTestNg" />
+		<listener class-name="com.qa.util.TestListener"/>
 	</listeners>
 	<test thread-count="5" name="Test">
 		<classes>

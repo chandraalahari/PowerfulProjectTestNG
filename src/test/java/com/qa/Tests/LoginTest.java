@@ -9,11 +9,11 @@ import com.qa.base.BaseTest;
 import com.qa.factory.DriverFactory;
 import com.qa.pages.LoginPage;
 import com.qa.util.RetryAnalyzer;
-import com.qa.util.TestListner;
+import com.qa.util.TestListener;
 
 import io.qameta.allure.Description;
 
-@Listeners({TestListner.class})
+@Listeners(TestListener.class)
 public class LoginTest extends BaseTest {
 
 	private LoginPage loginPage;
