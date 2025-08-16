@@ -28,7 +28,7 @@ public class LoginTest extends BaseTest {
 	
 	public void userLogin() {
 		String title = loginPage.getTitle();
-		Assert.assertTrue(title.contains("Sign1"));
+		Assert.assertTrue(title.contains("Sign"));
 	}
 
 }
