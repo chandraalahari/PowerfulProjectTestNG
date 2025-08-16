@@ -75,3 +75,4 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./target/allure-report
           destination_dir: allure-report
+          force_orphan: true
