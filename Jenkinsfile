@@ -47,21 +47,17 @@ pipeline {
             }
         }
     }
-     post {
-        always {
-            // Publish Allure report
-            allure([
-                includeProperties: false,
-                jdk: '',
-                results: [[path: 'target/allure-results']]
-            ])
-        }
-     }
-
-    post {
-        always {
-            echo "Pipeline finished. Reports archived."
-        }
+        post {
+            always {
+                echo "Pipeline finished. Reports archived."
+    
+                // Publish Allure report
+                allure([
+                    includeProperties: false,
+                    jdk: '',  // leave empty to use default
+                    results: [[path: 'target/allure-results']]
+                ])
+            }
     }
 }
 
