@@ -57,6 +57,14 @@ pipeline {
                     jdk: '',  // leave empty to use default
                     results: [[path: 'target/allure-results']]
                 ])
+                 // Publish Extent report as HTML tab (requires HTML Publisher plugin)
+                publishHTML([
+                    reportDir: 'reports',
+                    reportFiles: 'ExtentReport.html',
+                    reportName: 'Extent Report',
+                    allowMissing: true,
+                    keepAll: true
+                ])
             }
     }
 }
