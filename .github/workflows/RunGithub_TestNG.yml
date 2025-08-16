@@ -27,3 +27,17 @@ jobs:
        - name: Build with Maven TestNG (headless)  
          working-directory: ${{ github.workspace }}
          run: mvn verify -Dheadless=true -DBaseurl="${{env.BASE_URL}}" -DBrowser="${{env.BROWSER}}"
+      
+         # Publish Extent Report
+       - name: Upload Extent Report
+         uses: actions/upload-artifact@v3
+         with:
+          name: extent-report
+          path: target/extent-report
+
+        # Publish Allure Results
+       - name: Upload Allure Results
+         uses: actions/upload-artifact@v3
+         with:
+          name: allure-results
+          path: target/allure-results
