@@ -26,14 +26,21 @@ public class BaseTest {
 	public void setUpClass() throws FileNotFoundException, IOException {
 		log = LoggerHelper.getLogger(this.getClass());
 	    prop = ConfigReader.readConfigProperties();
-		browser = prop.getProperty("browser", "chrome");
+		browser = System.getenv("BROWSER");
+		if(browser == "" || browser.isEmpty())
+			browser = "chrome"; //assign default
 		log.info("Browser selected is - " + browser);
 	}
 
 	@BeforeMethod
 	public void setUpMethod() throws FileNotFoundException, IOException {
 		DriverFactory.getInstance().initiateBrowser(browser);
-		DriverFactory.getDriver().get(prop.getProperty("mainurl"));
+		String onionUrl = System.getenv("BASE_URL");
+		if(onionUrl == null || onionUrl.isEmpty()) {
+			onionUrl = prop.getProperty("mainurl");
+		}
+		
+		DriverFactory.getDriver().get(onionUrl);
 		WaitforPageLoad();
 	}
 
