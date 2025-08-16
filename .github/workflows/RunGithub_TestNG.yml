@@ -30,6 +30,7 @@ jobs:
       
          # Publish Extent Report
        - name: Upload Extent Report
+         if: always() 
          uses: actions/upload-artifact@v4
          with:
           name: extent-report
@@ -37,7 +38,16 @@ jobs:
 
         # Publish Allure Results
        - name: Upload Allure Results
+         if: always() 
          uses: actions/upload-artifact@v4
          with:
           name: allure-results
           path: target/allure-results
+
+       # Upload Allure HTML Report
+       - name: Upload Allure HTML
+         if: always()
+         uses: actions/upload-artifact@v3
+         with:
+          name: allure-report-html
+          path: target/site/allure-maven-plugin
