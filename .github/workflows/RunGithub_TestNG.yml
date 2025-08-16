@@ -30,14 +30,14 @@ jobs:
       
          # Publish Extent Report
        - name: Upload Extent Report
-         uses: actions/upload-artifact@v3
+         uses: actions/upload-artifact@v4
          with:
           name: extent-report
           path: target/extent-report
 
         # Publish Allure Results
        - name: Upload Allure Results
-         uses: actions/upload-artifact@v3
+         uses: actions/upload-artifact@v4
          with:
           name: allure-results
           path: target/allure-results
