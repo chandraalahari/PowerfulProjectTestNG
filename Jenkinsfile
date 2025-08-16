@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'windows' }  // or just "any" if no windows agent configured
+    agent any //{ label 'windows' } // or just "any" if no windows agent configured
 
     environment {
         BASE_URL      = 'https://dev.onion.gnapitech.org'
