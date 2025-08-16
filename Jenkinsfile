@@ -26,7 +26,7 @@ pipeline {
             steps {
                 echo "Running Maven tests"
                 bat """
-                    mvn clean verify -Dheadless=true -DBaseurl=%BASE_URL% -DBrowser=%BROWSER%
+                    mvn clean verify -Dheadless=true -DBaseurl=%BASE_URL% -DBrowser=%BROWSER% -Dthreadcount=3
                 """
             }
         }
