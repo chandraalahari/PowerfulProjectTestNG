@@ -1,99 +1,62 @@
-/*pipeline {
-    agent { label 'windows' }   // runs on a Windows agent; use 'any' if Linux is fine
+pipeline {
+    agent { label 'windows' }  // or just "any" if no windows agent configured
 
     environment {
-        BASE_URL     = "https://dev.onion.gnapitech.org"
-        CONTROLS_URL = "https://chandu0609.github.io/SeleniumAllControlsRepo/Selenium_Practice.html"
-        BROWSER      = "chrome"
+        BASE_URL      = 'https://dev.onion.gnapitech.org'
+        CONTROLS_URL  = 'https://chandu0609.github.io/SeleniumAllControlsRepo/Selenium_Practice.html'
+        BROWSER       = 'chrome'
     }
 
     stages {
-        stage('Checkout Code') {
+        stage('Checkout') {
             steps {
-                git branch: 'master',
-                    url: 'https://github.com/chandraalahari/PowerfulProjectTestNG.git',
-                    credentialsId: 'github-cred'
+                checkout scm
             }
         }
 
         stage('Set up JDK 17') {
             steps {
-                echo "Using JDK 17 (ensure Jenkins tool configuration has JDK17 installed)"
-                // If you have JDK configured in Jenkins tools:
-                // tool name must match Jenkins global tool config
-                // def javaHome = tool name: 'jdk17', type: 'jdk'
-                // env.JAVA_HOME = "${javaHome}"
-                // PATH+JAVA="${javaHome}/bin"
+                echo "Setting up JDK 17"
+                // Jenkins must have JDK installed or use a tool config
+                tool name: 'jdk17', type: 'jdk'
             }
         }
 
         stage('Build with Maven TestNG (headless)') {
             steps {
-                dir("${WORKSPACE}") {
-                    bat """
-                        mvn verify -Dheadless=true -DBaseurl=%BASE_URL% -DBrowser=%BROWSER%
-                    """
-                }
-            }
-            post {
-                always {
-                    echo "Maven test execution completed (success or fail)."
-                }
+                echo "Running Maven tests"
+                bat """
+                    mvn clean verify -Dheadless=true -DBaseurl=%BASE_URL% -DBrowser=%BROWSER%
+                """
             }
         }
 
         stage('Generate Allure Report') {
             steps {
-                bat 'mvn allure:report'
+                echo "Generating Allure report"
+                bat "mvn allure:report"
             }
         }
 
-        stage('List target directory') {
+        stage('Archive Reports') {
             steps {
-                bat 'dir target /s'
-            }
-        }
-
-        stage('Archive Extent Report') {
-            steps {
+                echo "Archiving Extent and Allure reports"
                 archiveArtifacts artifacts: 'reports/ExtentReport.html', allowEmptyArchive: true
-            }
-        }
-
-        stage('Archive Allure Results') {
-            steps {
-                archiveArtifacts artifacts: 'target/allure-results*', allowEmptyArchive: true
-            }
-        }
-
-        stage('Publish Allure Report') {
-            steps {
-                allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
-            }
-        }
-
-        stage('Archive Allure HTML') {
-            steps {
-                archiveArtifacts artifacts: 'target/allure-report*', allowEmptyArchive: true
+                archiveArtifacts artifacts: 'target/allure-results/**', allowEmptyArchive: true
+                archiveArtifacts artifacts: 'target/allure-report/**', allowEmptyArchive: true
             }
         }
     }
 
     post {
         always {
-            echo "Pipeline finished (success or failure)."
-        }
-        success {
-            echo "✅ All stages completed successfully!"
-        }
-        failure {
-            echo "❌ One or more stages failed — check logs and reports."
+            echo "Pipeline finished. Reports archived."
         }
     }
 }
-*/
 
-pipeline {
+
+/*pipeline {
     agent any
     stages {
         stage('Hello') {
@@ -107,4 +70,4 @@ pipeline {
             }
         }
     }
-}
+}*/
