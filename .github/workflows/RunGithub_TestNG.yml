@@ -26,7 +26,7 @@ jobs:
 
        - name: Build with Maven TestNG (headless)  
          working-directory: ${{ github.workspace }}
-         run: mvn verify -Dheadless=true -DBaseurl="${{env.BASE_URL}}" -DBrowser="${{env.BROWSER}}"
+         run: mvn verify -Dheadless=true -DBaseurl="${{env.BASE_URL}}" -DBrowser="${{env.BROWSER}}" -Dthreadcount=3
          continue-on-error: true
 
     
