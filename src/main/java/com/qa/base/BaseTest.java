@@ -18,36 +18,31 @@ import com.qa.util.LoggerHelper;
 
 public class BaseTest {
 
-	private String browser;
+	protected String browser;
 	protected Logger log;
-	private Properties prop;
+	protected Properties prop;
+	protected String base_url;
 
 	@BeforeSuite
 	public void setUpClass() throws FileNotFoundException, IOException {
 		log = LoggerHelper.getLogger(this.getClass());
-	    prop = ConfigReader.readConfigProperties();
+		prop = ConfigReader.readConfigProperties();
 		browser = System.getenv("BROWSER");
-		if(browser == "" || browser == null)
-			browser = "chrome"; //assign default
+		if (browser == "" || browser == null)
+			browser = "chrome"; // assign default
 		log.info("Browser selected is - " + browser);
 	}
 
-	@BeforeMethod
-	public void setUpMethod() throws FileNotFoundException, IOException {
+	protected void setUpMethod() throws FileNotFoundException, IOException {
 		DriverFactory.getInstance().initiateBrowser(browser);
-		String onionUrl = System.getenv("BASE_URL");
-		if(onionUrl == null || onionUrl == null) {
-			onionUrl = prop.getProperty("mainurl");
-		}
+		DriverFactory.getDriver().get(base_url);
 		
-		DriverFactory.getDriver().get(onionUrl);
-		WaitforPageLoad();
 	}
 
-	private void WaitforPageLoad() {
-		 new WebDriverWait(DriverFactory.getDriver(), Duration.ofSeconds(20))
-		          .until(ExpectedConditions.titleContains("Sign"));
-		
+	protected void WaitforPageLoad() {
+		new WebDriverWait(DriverFactory.getDriver(), Duration.ofSeconds(20))
+				.until(ExpectedConditions.titleContains("Sign"));
+
 	}
 
 	@AfterMethod

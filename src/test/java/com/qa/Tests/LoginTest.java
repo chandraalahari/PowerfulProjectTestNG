@@ -1,6 +1,10 @@
 package com.qa.Tests;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
+
 import org.testng.Assert;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -23,9 +27,19 @@ public class LoginTest extends BaseTest {
 
 	private LoginPage loginPage;
 
-	@BeforeMethod
+	@BeforeClass
 	public void setUp() {
+	   base_url = System.getenv("BASE_URL");
+		if(base_url == null || base_url.isEmpty()) {
+			base_url = prop.getProperty("mainurl");
+		}
+	}
+	
+	@BeforeMethod
+	public void setUpMethod() throws FileNotFoundException, IOException {
+		super.setUpMethod();
 		loginPage = new LoginPage(DriverFactory.getDriver());
+		WaitforPageLoad();
 	}
 
 	@Test(priority = 0, alwaysRun = true, description = "Login test are executed - Assert Page Title", retryAnalyzer = RetryAnalyzer.class)
