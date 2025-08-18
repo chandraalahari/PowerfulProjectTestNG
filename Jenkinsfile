@@ -27,7 +27,7 @@ pipeline {
                 echo "Running Maven tests"
                 bat """
                     mvn clean verify -Dheadless=true -DBaseurl=%BASE_URL% -DBrowser=%BROWSER% -Dthreadcount=3 \
-                    -Dtestgroups = "regression"
+                    -Dtestgroups="regression"
                 """
             }
         }
