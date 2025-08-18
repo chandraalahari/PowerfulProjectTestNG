@@ -11,7 +11,7 @@ jobs:
      runs-on: windows-latest
      env:
        BASE_URL: https://dev.onion.gnapitech.org
-       CONTROLS_URL: https://chandu0609.github.io/SeleniumAllControlsRepo/Selenium_Practice.html
+       CONTROLS_URL: https://chandu0609.github.io/SeleniumAllControlsRepo/login.html
        BROWSER: chrome
 
      steps:
@@ -26,7 +26,9 @@ jobs:
 
        - name: Build with Maven TestNG (headless)  
          working-directory: ${{ github.workspace }}
-         run: mvn verify -Dheadless=true -DBaseurl="${{env.BASE_URL}}" -DBrowser="${{env.BROWSER}}" -Dthreadcount=3
+         run: mvn verify -Dheadless=true -DBaseurl="${{env.BASE_URL}}" -DBrowser="${{env.BROWSER}}"\
+          -Dthreadcount=3 \
+          -Dtestgroups = "smoke"
          continue-on-error: true
 
     

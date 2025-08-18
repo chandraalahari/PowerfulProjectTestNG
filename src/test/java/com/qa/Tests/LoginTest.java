@@ -28,13 +28,14 @@ public class LoginTest extends BaseTest {
 	private LoginPage loginPage;
 
 	@BeforeClass
-	public void setUp() {
-	   base_url = System.getenv("BASE_URL");
-		if(base_url == null || base_url.isEmpty()) {
+	public void setUp() throws FileNotFoundException, IOException {
+		super.setUpClass();
+		base_url = System.getenv("BASE_URL");
+		if (base_url == null || base_url.isEmpty()) {
 			base_url = prop.getProperty("mainurl");
 		}
 	}
-	
+
 	@BeforeMethod
 	public void setUpMethod() throws FileNotFoundException, IOException {
 		super.setUpMethod();
@@ -42,14 +43,14 @@ public class LoginTest extends BaseTest {
 		WaitforPageLoad();
 	}
 
-	@Test(priority = 0, alwaysRun = true, description = "Login test are executed - Assert Page Title", retryAnalyzer = RetryAnalyzer.class)
+	@Test(priority = 0, alwaysRun = true, groups = "smoke", description = "Login test are executed - Assert Page Title", retryAnalyzer = RetryAnalyzer.class)
 	@Description("The Title Page Text Test")
 	public void onionToolWebTitle() {
 		String title = loginPage.getTitle();
 		Assert.assertTrue(title.contains("Sign in to Onion"));
 	}
-	
-	@Test(priority = 1, alwaysRun = true, description = "Forgot password link exist", retryAnalyzer = RetryAnalyzer.class)
+
+	@Test(priority = 1, alwaysRun = true, groups = "regression", description = "Forgot password link exist", retryAnalyzer = RetryAnalyzer.class)
 	@Epic("Home Page Epic")
 	@Feature("Home Page features")
 	@Story("Home Page Story")
@@ -59,7 +60,7 @@ public class LoginTest extends BaseTest {
 		boolean forgotText = loginPage.forgotPassWordPageShown();
 		Assert.assertTrue(forgotText);
 	}
-	
+
 	@Test(priority = 2, alwaysRun = true, description = "User Login Test", retryAnalyzer = RetryAnalyzer.class)
 	@Epic("User Login Epic")
 	@Feature("User Login features")
@@ -72,6 +73,5 @@ public class LoginTest extends BaseTest {
 		String landingPageText = loginPage.extractTitleOnHomePage();
 		Assert.assertEquals(landingPageText, "Onion: Complete Test Management Platform");
 	}
-	
 
 }

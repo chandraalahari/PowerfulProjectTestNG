@@ -23,7 +23,7 @@ public class BaseTest {
 	protected Properties prop;
 	protected String base_url;
 
-	@BeforeSuite
+	
 	public void setUpClass() throws FileNotFoundException, IOException {
 		log = LoggerHelper.getLogger(this.getClass());
 		prop = ConfigReader.readConfigProperties();
