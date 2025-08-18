@@ -85,9 +85,14 @@
 			<version>1.18.30</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.opencsv</groupId>
+			<artifactId>opencsv</artifactId>
+			<version>5.9</version>
+		</dependency>
 	</dependencies>
 	<build>
-	<plugins>
+		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -106,10 +111,11 @@
 					<suiteXmlFiles>
 						<suiteXmlFile>testng.xml</suiteXmlFile>
 					</suiteXmlFiles>
+					<groups>${test.groups}</groups>
 					<systemPropertyVariables>
 						<!-- Force Allure to use target directory -->
 						<allure.results.directory>
-		${project.build.directory}/allure-results</allure.results.directory>
+							${project.build.directory}/allure-results</allure.results.directory>
 					</systemPropertyVariables>
 					<properties>
 						<property>
@@ -133,7 +139,7 @@
 					<resultsDirectory>
 						${project.build.directory}/allure-results</resultsDirectory>
 					<allureDownloadUrl>
-		https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/${allure.version}/allure-commandline-${allure.version}.zip</allureDownloadUrl>
+						https://repo.maven.apache.org/maven2/io/qameta/allure/allure-commandline/${allure.version}/allure-commandline-${allure.version}.zip</allureDownloadUrl>
 					<reportDirectory>
 						${project.build.directory}/allure-report</reportDirectory>
 				</configuration>

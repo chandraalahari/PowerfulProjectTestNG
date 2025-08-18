@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         BASE_URL      = 'https://dev.onion.gnapitech.org'
-        CONTROLS_URL  = 'https://chandu0609.github.io/SeleniumAllControlsRepo/Selenium_Practice.html'
+        CONTROLS_URL  = 'https://chandu0609.github.io/SeleniumAllControlsRepo/login.html'
         BROWSER       = 'chrome'
     }
 
@@ -26,7 +26,8 @@ pipeline {
             steps {
                 echo "Running Maven tests"
                 bat """
-                    mvn clean verify -Dheadless=true -DBaseurl=%BASE_URL% -DBrowser=%BROWSER% -Dthreadcount=3
+                    mvn clean verify -Dheadless=true -DBaseurl=%BASE_URL% -DBrowser=%BROWSER% -Dthreadcount=3 \
+                    -Dtestgroups = "regression"
                 """
             }
         }
