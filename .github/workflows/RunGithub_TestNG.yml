@@ -30,7 +30,7 @@ jobs:
           mvn verify -Dheadless=true -DBaseurl="${{env.BASE_URL}}" -DBrowser="${{env.BROWSER}}" `
           -Dthreadcount=3 `
           -Dtestgroups="smoke"
-          continue-on-error: true
+         continue-on-error: true
 
     
        - name: Generate Allure Report
